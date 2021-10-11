@@ -17,7 +17,7 @@ app.get('/', (request, response) => {
 // Não remover esse end-point, ele é necessário para o avaliador
 
 app.post('/login', validator({
-  name: 'required',
+  password: 'required',
   email: 'required|email',
 }, FIELDS_MUST_BE_FILLED), userController.login);
 app.use('/users', userRoutes);

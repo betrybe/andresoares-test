@@ -15,7 +15,7 @@ const USER_PARAMS_INCORRECT = {
 
 const FIELDS_MUST_BE_FILLED = {
   status: 401,
-  message: 'All fields must to be filled',
+  message: 'All fields must be filled',
 };
 
 module.exports = {

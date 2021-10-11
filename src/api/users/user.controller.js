@@ -5,7 +5,7 @@ const create = async (req, res, next) => {
   try {
     const result = await userService.create(req.body);
 
-    return res.status(201).json(result);
+    return res.status(201).json({ user: result });
   } catch (e) {
     next(new HttpException(e));
   }
