@@ -1,3 +1,5 @@
+const APP_SECRET = 'umachavemegadificil';
+
 const ROLES = {
   USER: 'user',
   ADMIN: 'admin',
@@ -12,6 +14,7 @@ const DB_PROD = `mongodb://mongodb:27017/${DB_NAME}`;
 const MONGO_DB_URL = IS_DEV ? DB_LOCAL : DB_PROD;
 
 module.exports = {
+  APP_SECRET,
   ROLES,
   MONGO_DB_URL,
   DB_NAME,

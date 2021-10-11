@@ -11,4 +11,14 @@ const create = async (req, res, next) => {
   }
 };
 
-module.exports = { create };
+const login = async (req, res, next) => {
+  try {
+    const result = await userService.login(req.body);
+
+    return res.status(200).json(result);
+  } catch (e) {
+    next(new HttpException(e));
+  }
+};
+
+module.exports = { create, login };
