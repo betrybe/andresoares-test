@@ -18,9 +18,27 @@ const FIELDS_MUST_BE_FILLED = {
   message: 'All fields must be filled',
 };
 
+const JWT_MALFORMED = {
+  status: 401,
+  message: 'jwt malformed',
+};
+
+const RECIPE_NOT_FOUND = {
+  status: 404,
+  message: 'recipe not found',
+};
+
+const SERVER_ERROR = {
+  status: 500,
+  message: 'Internal error',
+};
+
 module.exports = {
   DEFAULT_BAD_REQUEST,
   EMAIL_ALREADY_EXIST,
   USER_PARAMS_INCORRECT,
   FIELDS_MUST_BE_FILLED,
+  JWT_MALFORMED,
+  SERVER_ERROR,
+  RECIPE_NOT_FOUND,
 };

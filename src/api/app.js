@@ -4,6 +4,7 @@ const { FIELDS_MUST_BE_FILLED } = require('../shared/error-message.shared');
 const validator = require('../middlewares/validator.middleware');
 
 const userRoutes = require('./users/user.routes');
+const recipeController = require('./recipes/recipe.routes');
 const userController = require('./users/user.controller');
 
 const app = express();
@@ -21,6 +22,7 @@ app.post('/login', validator({
   email: 'required|email',
 }, FIELDS_MUST_BE_FILLED), userController.login);
 app.use('/users', userRoutes);
+app.use('/recipes', recipeController);
 
 app.use(customErrorResponse);
 
