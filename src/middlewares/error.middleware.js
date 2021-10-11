@@ -2,8 +2,8 @@ const HttpException = require('../shared/exceptions.shared');
 
 const customErrorResponse = (err, _req, res, _) => {
   if (err instanceof HttpException) {
-    return res.status(err.status).json({
-      message: err.message,
+    return res.status(err.status || 500).json({
+      message: err.message || 'Internal server error',
     });
   }
 
