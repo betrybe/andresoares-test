@@ -6,6 +6,7 @@ const HttpException = require('../../shared/exceptions.shared');
 
  const { 
    ROLES,
+   API_URL,
 } = require('../../shared/constants.shared');
 
 const Recipe = require('./recipe.model');
@@ -79,6 +80,28 @@ const update = async (id, { name, ingredients, preparation, user }) => {
   }
 };
 
+const saveImage = async (id, { image, user }) => {
+  try {
+    const where = user.role === ROLES.ADMIN ? { _id: id } : { _id: id, userId: user.id };
+    console.log({ image });
+    await Recipe.where(where)
+                        .update({ image: `${API_URL}/${image}` });
+
+    const recipe = await Recipe.findOne(where);
+
+    return {
+      _id: recipe.id,
+      name: recipe.name,
+      ingredients: recipe.ingredients,
+      preparation: recipe.preparation,
+      userId: recipe.userId,
+      image: recipe.image,
+    };
+  } catch (e) {
+    throw new HttpException(RECIPE_NOT_FOUND);
+  }
+};
+
 const remove = async (id, user) => {
   try {
       const where = user.role === ROLES.ADMIN ? { _id: id } : { _id: id, userId: user.id };
@@ -91,4 +114,4 @@ const remove = async (id, user) => {
   }
 };
 
-module.exports = { create, listAll, getById, update, remove };
+module.exports = { create, listAll, getById, update, remove, saveImage };

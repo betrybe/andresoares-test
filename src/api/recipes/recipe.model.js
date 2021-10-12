@@ -13,6 +13,10 @@ const recipeSchema = new Schema({
         type: String,
         required: true,
     },
+    image: {
+        type: String,
+        required: false,
+    },
     userId: {
         type: Schema.Types.ObjectId,
         ref: 'users',

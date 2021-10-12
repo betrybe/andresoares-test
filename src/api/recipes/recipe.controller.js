@@ -42,6 +42,17 @@ const update = async (req, res, next) => {
   }
 };
 
+const saveImage = async (req, res, next) => {
+  try {
+    const recipe = await recipeService
+                  .saveImage(req.params.id, { image: req.file.path, user: req.user });
+
+    return res.status(200).json(recipe);
+  } catch (e) {
+    next(new HttpException(e));
+  }
+};
+
 const remove = async (req, res, next) => {
   try {
     await recipeService.remove(req.params.id, req.user);
@@ -52,4 +63,4 @@ const remove = async (req, res, next) => {
   }
 };
 
-module.exports = { create, listAll, getById, update, remove };
+module.exports = { create, listAll, getById, update, remove, saveImage };

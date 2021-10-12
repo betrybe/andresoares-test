@@ -1,6 +1,10 @@
 const express = require('express');
+const multer = require('multer');
 const validator = require('../../middlewares/validator.middleware');
 const checkAuth = require('../../middlewares/auth.middleware');
+const { storage } = require('../../shared/configs.shared');
+
+const upload = multer({ storage });
 
 const recipeController = require('./recipe.controller');
 
@@ -30,6 +34,13 @@ router.put('/:id',
    checkAuth,
   ],
   recipeController.update);
+
+router.put('/:id/image',
+  [
+   checkAuth,
+   upload.single('image'),
+  ],
+  recipeController.saveImage);
 
 router.delete('/:id',
   checkAuth,
