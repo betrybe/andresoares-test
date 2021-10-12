@@ -32,4 +32,24 @@ const getById = async (req, res, next) => {
   }
 };
 
-module.exports = { create, listAll, getById };
+const update = async (req, res, next) => {
+  try {
+    const recipe = await recipeService.update(req.params.id, { ...req.body, user: req.user });
+
+    return res.status(200).json(recipe);
+  } catch (e) {
+    next(new HttpException(e));
+  }
+};
+
+const remove = async (req, res, next) => {
+  try {
+    await recipeService.remove(req.params.id, req.user);
+
+    return res.status(204).json();
+  } catch (e) {
+    next(new HttpException(e));
+  }
+};
+
+module.exports = { create, listAll, getById, update, remove };

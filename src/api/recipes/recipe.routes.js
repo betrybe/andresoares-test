@@ -20,6 +20,21 @@ router.post('/',
 router.get('/:id', 
   recipeController.getById);
 
+router.put('/:id',
+  [
+   validator({
+      name: 'required',
+      ingredients: 'required',
+      preparation: 'required',
+   }),
+   checkAuth,
+  ],
+  recipeController.update);
+
+router.delete('/:id',
+  checkAuth,
+  recipeController.remove);
+
 router.get('/', 
   recipeController.listAll);
 

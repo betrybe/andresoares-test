@@ -4,6 +4,7 @@ const { verify } = require('jsonwebtoken');
 } = require('../shared/constants.shared');
  const { 
    JWT_MALFORMED,
+   JWT_IS_MISSING,
 } = require('../shared/error-message.shared');
 const HttpException = require('../shared/exceptions.shared');
 
@@ -14,12 +15,12 @@ const checkAuth = async (req, _, next) => {
     const { authorization } = req.headers;
 
     if (!authorization) {
-      next(new HttpException(JWT_MALFORMED));
+      next(new HttpException(JWT_IS_MISSING));
     }
 
     const { sub } = verify(authorization, APP_SECRET);
 
-    const user = await User.findOne({ id: sub });
+    const user = await User.findOne({ _id: sub });
 
     if (!user) {
       next(new HttpException(JWT_MALFORMED));

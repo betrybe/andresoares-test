@@ -4,6 +4,10 @@ const HttpException = require('../../shared/exceptions.shared');
    RECIPE_NOT_FOUND,
 } = require('../../shared/error-message.shared');
 
+ const { 
+   ROLES,
+} = require('../../shared/constants.shared');
+
 const Recipe = require('./recipe.model');
 
 const create = async ({ name, ingredients, preparation, userId }) => {
@@ -54,4 +58,37 @@ const getById = async (id) => {
   }
 };
 
-module.exports = { create, listAll, getById };
+const update = async (id, { name, ingredients, preparation, user }) => {
+  try {
+    const where = user.role === ROLES.ADMIN ? { _id: id } : { _id: id, userId: user.id };
+
+    await Recipe.where(where)
+                        .update({ name, ingredients, preparation });
+
+    const recipe = await Recipe.findOne(where);
+
+    return {
+      _id: recipe.id,
+      name: recipe.name,
+      ingredients: recipe.ingredients,
+      preparation: recipe.preparation,
+      userId: recipe.userId,
+    };
+  } catch (e) {
+    throw new HttpException(RECIPE_NOT_FOUND);
+  }
+};
+
+const remove = async (id, user) => {
+  try {
+      const where = user.role === ROLES.ADMIN ? { _id: id } : { _id: id, userId: user.id };
+
+      await Recipe.where(where)
+                          .remove();
+      return true;
+  } catch (e) {
+    throw new HttpException(RECIPE_NOT_FOUND);
+  }
+};
+
+module.exports = { create, listAll, getById, update, remove };

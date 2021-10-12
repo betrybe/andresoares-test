@@ -23,6 +23,11 @@ const JWT_MALFORMED = {
   message: 'jwt malformed',
 };
 
+const JWT_IS_MISSING = {
+  status: 401,
+  message: 'missing auth token',
+};
+
 const RECIPE_NOT_FOUND = {
   status: 404,
   message: 'recipe not found',
@@ -41,4 +46,5 @@ module.exports = {
   JWT_MALFORMED,
   SERVER_ERROR,
   RECIPE_NOT_FOUND,
+  JWT_IS_MISSING,
 };
