@@ -1,12 +1,13 @@
 const { sign } = require('jsonwebtoken');
 const { MongoClient } = require('mongodb');
-const mongoDbUrl = 'mongodb://localhost:27017/Cookmaster';
+
  const { 
    APP_SECRET,
+   MONGO_DB_URL,
 } = require('../shared/constants.shared');
 
 before(async () => {
-  connection = await MongoClient.connect(mongoDbUrl, {
+  connection = await MongoClient.connect(MONGO_DB_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });

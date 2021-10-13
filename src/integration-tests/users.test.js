@@ -34,6 +34,19 @@ describe('Modulo - users', function () {
                   done();
         });
       });
+  });
 
+  it("Deve lançar um erro quando usuário não digitar email/senha correta", (done) => {
+      chai
+        .request(app)
+        .post('/login')
+        .send({
+          email: 'andre@email.com',
+          password: '123'
+        })
+        .end((_, res) => {
+            expect(res).to.have.status(401);
+            done();
+      });
   });
 });

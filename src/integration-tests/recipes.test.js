@@ -76,4 +76,45 @@ describe('Modulo - recipes', function() {
           done();
       }); 
   })
+
+  it('Deve lançar um erro não autorizado ao tentar criar receita sem token', (done) => {
+     
+      chai
+        .request(app)
+        .post('/recipes')
+        .send({
+          name: 'Bolo de Abacaxi',
+          ingredients: 'Abacaxi e outras coisas de bolo',
+          preparation: 'Colocar no forno e aguardar até ficar pronto.'
+        })
+        .end((err, res) => {
+          expect(err).to.be.null;
+          expect(res).to.have.status(401);
+          done();
+      }); 
+  })
+
+  it('Deve lançar um erro não autorizado ao tentar atualizar imagem sem token', (done) => {
+      chai
+        .request(app)
+        .put(`/recipes/${global.recipeId}/image`)
+        .set('content-type', 'multipart/form-data')
+        .attach('image', `${__dirname}/../uploads/ratinho.jpg`)
+        .end((err, res) => {
+          expect(err).to.be.null;
+          expect(res).to.have.status(401);
+          done();
+      }); 
+  })
+
+  it('Deve lançar um erro quando receita não for encontrada', (done) => {
+      chai
+        .request(app)
+        .get('/recipes/123')
+        .end((err, res) => {
+          expect(err).to.be.null;
+          expect(res).to.have.status(404);
+          done();
+      }); 
+  })
 });
