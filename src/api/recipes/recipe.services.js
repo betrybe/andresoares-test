@@ -83,7 +83,7 @@ const update = async (id, { name, ingredients, preparation, user }) => {
 const saveImage = async (id, { image, user }) => {
   try {
     const where = user.role === ROLES.ADMIN ? { _id: id } : { _id: id, userId: user.id };
-    console.log({ image });
+
     await Recipe.where(where)
                         .update({ image: `${API_URL}/${image}` });
 
