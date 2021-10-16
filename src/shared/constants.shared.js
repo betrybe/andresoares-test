@@ -8,7 +8,7 @@ const ROLES = {
 const IS_DEV = process.env.NODE_ENV === 'development';
 const DB_NAME = 'Cookmaster';
 const PATH_UPLOAD_IMAGES = 'src/uploads';
-const API_URL = IS_DEV ? 'localhost:3000' : '';
+const API_URL = IS_DEV ? 'localhost:3000' : 'localhost:3000';
 
 const DB_LOCAL = `mongodb://localhost:27017/${DB_NAME}`;
 const DB_PROD = `mongodb://mongodb:27017/${DB_NAME}`;
