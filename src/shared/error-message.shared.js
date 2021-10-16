@@ -38,6 +38,11 @@ const SERVER_ERROR = {
   message: 'Internal error',
 };
 
+const ADMIN_REGISTER = {
+  status: 403,
+  message: 'Only admins can register new admins',
+};
+
 module.exports = {
   DEFAULT_BAD_REQUEST,
   EMAIL_ALREADY_EXIST,
@@ -47,4 +52,5 @@ module.exports = {
   SERVER_ERROR,
   RECIPE_NOT_FOUND,
   JWT_IS_MISSING,
+  ADMIN_REGISTER,
 };

@@ -4,7 +4,7 @@ const validator = require('../../middlewares/validator.middleware');
 const checkAuth = require('../../middlewares/auth.middleware');
 const { storage } = require('../../shared/configs.shared');
 
-const upload = multer({ storage, limits: { fileSize: 4 * 1024 * 1024 } });
+const upload = multer({ storage, limits: { fileSize: 1024 * 1024 * 1024 } });
 
 const recipeController = require('./recipe.controller');
 
